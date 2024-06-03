@@ -1,0 +1,17 @@
+@mixin active-transform($axis) {
+    will-change: transform;
+    cursor: pointer;
+    transition: transform 0.25s var(--default-cubic-bezier);
+
+    @if $axis == 'x' {
+        &:active {
+            transform: translateX(5%);
+        }
+    } @else if $axis == 'y' {
+        &:active {
+            transform: translateY(5%);
+        }
+    } @else {
+        @warn "Неправильное значение оси: #{$axis}. Используйте 'x' либо 'y'";
+    }
+}

@@ -1,0 +1,33 @@
+@import '@/styles/mixins';
+
+.navigation-bar {
+    @include flex-row-center-center();
+    user-select: none;
+
+    width: 100%;
+    background: var(--color-black);
+
+    overflow: hidden;
+
+    > .navigation-bar__list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5px;
+        width: 900px;
+
+        > .navigation-bar__item {
+            @include default-hover-text();
+
+            color: var(--color-text-idle);
+            font-size: 0.9rem;
+
+            &--selected {
+                pointer-events: none;
+
+                color: var(--color-primary);
+                text-shadow: 0 0 0.5px var(--color-primary);
+            }
+        }
+    }
+}

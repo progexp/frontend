@@ -1,0 +1,8 @@
+@mixin default-hover-text() {
+    cursor: pointer;
+    transition: color 0.25s var(--default-cubic-bezier);
+
+    &:hover {
+        color: var(--color-text-active);
+    }
+}

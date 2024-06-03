@@ -1,0 +1,12 @@
+@mixin default-hover-scale() {
+    cursor: pointer;
+    transition: transform 0.25s var(--default-cubic-bezier);
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(1.1);
+    }
+}

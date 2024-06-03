@@ -1,0 +1,28 @@
+@import '@/styles/mixins';
+
+.footer {
+    @include flex-row-start-center();
+
+    width: 100%;
+    background: var(--color-secondary);
+
+    overflow: hidden;
+
+    > .footer__info {
+        @include flex-row-center-center();
+        padding: 15px;
+        gap: 20px;
+
+        > .info__logotype {
+            > .logotype__icon {
+            }
+        }
+
+        > .info__copyright {
+            > .copyright__text {
+                color: var(--color-text-idle);
+                font-size: var(--font-size-small);
+            }
+        }
+    }
+}
