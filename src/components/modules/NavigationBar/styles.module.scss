@@ -13,14 +13,14 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 5px;
+        padding-block: 5px;
         width: 900px;
 
         > .navigation-bar__item {
             @include default-hover-text();
 
             color: var(--color-text-idle);
-            font-size: 0.9rem;
+            font-size: var(--font-size-input);
 
             &--selected {
                 pointer-events: none;

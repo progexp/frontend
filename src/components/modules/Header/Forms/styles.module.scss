@@ -1,0 +1,59 @@
+@import '@/styles/mixins';
+
+.modal__form {
+    @include flex-col-start-center();
+    gap: 20px;
+
+    width: 400px;
+
+    > .form__logotype {
+        @include flex-col-start-center();
+        gap: 20px;
+
+        > .logotype__img {
+            width: 100%;
+        }
+
+        > .logotype__text {
+            width: 100%;
+            color: var(--color-text-primary);
+            font-size: var(--font-size--big-logotype);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    }
+
+    > .form__title {
+        width: 100%;
+        text-align: center;
+        color: var(--color-text-primary);
+        font-size: var(--font-size-default);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    > .form__content {
+        @include flex-col-start-center();
+        gap: 20px;
+
+        width: 100%;
+
+        > .form__inputs {
+            @include flex-col-start-center();
+            gap: 20px;
+
+            width: 100%;
+
+            > * {
+                width: 100%;
+                height: 50px;
+            }
+        }
+
+        > .form__buttons {
+            width: 100%;
+        }
+    }
+}

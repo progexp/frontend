@@ -3,6 +3,7 @@
 import cn from 'classnames';
 import style from './styles.module.scss';
 
+import Link from 'next/link';
 import Image from 'next/image';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -42,6 +43,28 @@ export default function Footer() {
                         <p className={cn(style.copyright__text)}>ProgExp</p>
                         <p className={cn(style.copyright__text)}>2024 © All rights reserved.</p>
                     </div>
+                </div>
+                <div className={cn(style.footer_links)}>
+                    <Link href="https://vk.com/mortylolik">
+                        <Image
+                            src="http://localhost:4200/static/contacts/mortyhwk.jpg"
+                            alt="mortyhwk"
+                            width={35}
+                            height={35}
+                            draggable={false}
+                            className={cn(style.links__link)}
+                        />
+                    </Link>
+                    <Link href="https://vk.com/kazax_bita">
+                        <Image
+                            src="http://localhost:4200/static/contacts/shpekel.jpg"
+                            alt="mortyhwk"
+                            width={35}
+                            height={35}
+                            draggable={false}
+                            className={cn(style.links__link)}
+                        />
+                    </Link>
                 </div>
             </motion.footer>
         </AnimatePresence>

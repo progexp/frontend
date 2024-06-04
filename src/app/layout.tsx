@@ -3,7 +3,7 @@ import './styles.scss';
 import type { Metadata, Viewport } from 'next';
 import type { ChildrenProps } from '@/types';
 
-import { Header, NavigationBar, Footer } from '@/components';
+import { Header, NavigationBar, Footer, QueryProvider } from '@/components';
 
 export const metadata: Metadata = {
     title: 'ProgExp - передовое приложение для коммуникации программистов',
@@ -18,10 +18,12 @@ export default function RootLayout({ children }: ChildrenProps) {
     return (
         <html lang="ru">
             <body>
-                <Header />
-                <NavigationBar />
-                <Footer />
-                {children}
+                <QueryProvider>
+                    <Header />
+                    <NavigationBar />
+                    <Footer />
+                    {children}
+                </QueryProvider>
             </body>
         </html>
     );

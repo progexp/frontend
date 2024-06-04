@@ -1,0 +1,169 @@
+@import '@/styles/mixins';
+
+.userprofile {
+    position: relative;
+    cursor: pointer;
+
+    > .userbar {
+        padding: 5px 10px;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius-default);
+
+        transition:
+            background 0.25s var(--default-cubic-bezier),
+            border-color 0.25s var(--default-cubic-bezier);
+
+        > .userbar__inner {
+            @include flex-row-center-center();
+
+            gap: 10px;
+
+            > .userbar__avatar {
+                border-radius: 50%;
+                border: 1px solid var(--color-border-default);
+            }
+
+            > .userbar__username {
+                color: var(--color-text-primary);
+                font-size: var(--font-size-default);
+                font-weight: var(--font-weight-medium);
+            }
+        }
+
+        &:hover {
+            border-color: var(--color-border-default);
+            background: var(--color-secondary--hover);
+        }
+    }
+
+    &--open {
+        > .userbar {
+            border: 1px solid var(--color-border-default);
+            background: var(--color-secondary--hover);
+        }
+    }
+
+    > .menu {
+        position: absolute;
+        top: 100% + 11.5%;
+        right: 0;
+        width: 200px;
+        padding: 5px;
+        background: var(--color-userbar-profile--background);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--border-radius-default);
+        z-index: var(--z-index-userbar-profile);
+
+        > .menu__inner {
+            display: flex;
+            flex-direction: column;
+            //gap: 50px;
+
+            > a {
+                > .menu__user {
+                    @include flex-col-start-center();
+
+                    padding: 20px;
+                    gap: 10px;
+
+                    border: 1px solid transparent;
+                    border-radius: var(--border-radius-default);
+
+                    overflow: hidden;
+
+                    transition:
+                        background 0.25s var(--default-cubic-bezier),
+                        border-color 0.25s var(--default-cubic-bezier);
+
+                    > .user__avatar {
+                        border-radius: 50%;
+                        border: 1px solid var(--color-border-default);
+
+                        animation: box-shadow 5s infinite;
+                    }
+
+                    > .user__username,
+                    > .user__email {
+                        color: var(--color-text-primary);
+                        font-size: var(--font-size-default);
+                        font-weight: var(--font-weight-medium);
+                    }
+
+                    > .user__email {
+                        margin-top: -5px;
+                        color: var(--color-text-idle);
+                        font-size: var(--font-size-very-small);
+                        letter-spacing: 0.25px;
+                    }
+
+                    &:hover {
+                        border-color: var(--color-border-default);
+                        background: var(--color-primary--hover);
+                    }
+
+                    &:active {
+                        border-color: var(--color-border-default);
+                        background: var(--color-primary--active);
+                    }
+                }
+            }
+
+            > .menu__list {
+                @include flex-col-start-center();
+
+                list-style: none;
+
+                > .list__item {
+                    width: 100%;
+                    border: 1px solid transparent;
+                    border-radius: var(--border-radius-default);
+                    cursor: pointer;
+
+                    transition:
+                        background 0.25s var(--default-cubic-bezier),
+                        border-color 0.25s var(--default-cubic-bezier);
+
+                    > .item__inner {
+                        @include flex-row-start-center();
+
+                        gap: 10px;
+                        padding: 10px;
+
+                        > .item__text {
+                            color: var(--color-text-primary);
+                            font-size: var(--font-size-input);
+                        }
+                    }
+
+                    &:hover {
+                        border-color: var(--color-border-default);
+                        background: var(--color-primary--hover);
+                    }
+
+                    &:active {
+                        border-color: var(--color-border-default);
+                        background: var(--color-primary--active);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes box-shadow {
+    from {
+        box-shadow:
+            60px -25px 100px var(--color-primary--vivid),
+            130px -65px 50px var(--color-primary--vivid);
+    }
+    50% {
+        box-shadow:
+            60px -25px 300px var(--color-primary--vivid),
+            130px -65px 80px var(--color-primary--vivid);
+    }
+    to {
+        box-shadow:
+            60px -25px 100px var(--color-primary--vivid),
+            130px -65px 50px var(--color-primary--vivid);
+    }
+}

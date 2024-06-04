@@ -1,0 +1,15 @@
+@import '@/styles/mixins';
+
+.modal {
+    @include center-block();
+    background: var(--color-black-alpha);
+
+    pointer-events: auto;
+    z-index: var(--z-index-modal);
+
+    > .modal__inner {
+        background: var(--color-surface);
+        padding: 20px;
+        border-radius: var(--border-radius-default);
+    }
+}
