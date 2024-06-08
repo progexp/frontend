@@ -1,20 +1,42 @@
 import { removeFromStorage, saveTokenStorage } from './auth-token.service';
-import type { AuthForm, AuthResponse } from '@/interfaces';
 import { axiosClassic } from '@/interceptors';
 
 export const authService = {
-    async main(type: 'login' | 'register', data: AuthForm) {
-        const response = await axiosClassic.post<AuthResponse>(`/auth/${type}`, data);
+    async tryLogin(login: string, password: string, isRemember: boolean) {
+        const response = await axiosClassic.post('/auth/login', {
+            login: login,
+            password: password,
+            isRemember: isRemember
+        });
 
-        if (response.data.accessToken) saveTokenStorage(response.data.accessToken);
+        if (response.data.accessToken) {
+            saveTokenStorage(response.data.accessToken);
+        }
+
+        return response;
+    },
+
+    async tryRegister(login: string, email: string, password: string, passwordConfirm: string) {
+        const response = await axiosClassic.post('/auth/register', {
+            login: login,
+            email: email,
+            password: password,
+            passwordConfirm: passwordConfirm
+        });
+
+        if (response.data.accessToken) {
+            saveTokenStorage(response.data.accessToken);
+        }
 
         return response;
     },
 
     async getNewTokens() {
-        const response = await axiosClassic.post<AuthResponse>('/auth/login/access-token');
+        const response = await axiosClassic.post('/auth/login/access-token');
 
-        if (response.data.accessToken) saveTokenStorage(response.data.accessToken);
+        if (response.data.accessToken) {
+            saveTokenStorage(response.data.accessToken);
+        }
 
         return response;
     },
@@ -22,7 +44,9 @@ export const authService = {
     async logout() {
         const response = await axiosClassic.post<boolean>('/auth/logout');
 
-        if (response.data) removeFromStorage();
+        if (response.data) {
+            removeFromStorage();
+        }
 
         return response;
     }

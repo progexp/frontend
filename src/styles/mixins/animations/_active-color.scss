@@ -1,0 +1,8 @@
+@mixin active-color($color) {
+    cursor: pointer;
+    transition: background 0.5s var(--cubic-bezier--default);
+
+    &:active {
+        background: $color;
+    }
+}

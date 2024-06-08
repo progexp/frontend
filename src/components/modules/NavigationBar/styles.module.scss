@@ -19,8 +19,8 @@
         > .navigation-bar__item {
             @include default-hover-text();
 
-            color: var(--color-text-idle);
-            font-size: var(--font-size-input);
+            color: var(--color-text--idle);
+            font-size: var(--font-size--input);
 
             &--selected {
                 pointer-events: none;

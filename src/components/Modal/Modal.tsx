@@ -7,10 +7,18 @@ import { motion } from 'framer-motion';
 import { CUBIC_EASE, TIME } from '@/constants';
 
 import type { ChildrenProps } from '@/types';
+import type { CloseCallbackProps } from '@/components';
+import { useClickOutside } from '@/hooks';
+import { useRef } from 'react';
+import Image from 'next/image';
 
-export type ModalProps = ChildrenProps;
+export type ModalProps = ChildrenProps & CloseCallbackProps;
 
-export default function Modal({ children }: ModalProps) {
+export default function Modal({ closeCallback, children }: ModalProps) {
+    const formRef = useRef<HTMLDivElement>(null);
+
+    useClickOutside(formRef, closeCallback);
+
     return (
         <motion.div
             className={cn(style.modal)}
@@ -27,6 +35,7 @@ export default function Modal({ children }: ModalProps) {
         >
             <motion.div
                 className={cn(style.modal__inner)}
+                ref={formRef}
                 initial={{
                     opacity: 0,
                     scale: 0
@@ -41,6 +50,11 @@ export default function Modal({ children }: ModalProps) {
                 }}
                 transition={{ duration: TIME, ease: CUBIC_EASE }}
             >
+                <div className={cn(style['modal__close-btn'])}>
+                    <div className={cn(style['close-btn__btn'])} onClick={closeCallback}>
+                        <Image src="input/cancel.svg" alt="" width={50} height={50} />
+                    </div>
+                </div>
                 {children}
             </motion.div>
         </motion.div>

@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { CUBIC_EASE, TIME } from '@/constants';
 
 import { InputIcons } from '@/enums';
+import { useEscapePress } from '@/hooks';
 
 export default function Header() {
     const [search, setSearch] = useState<string>('');
@@ -20,10 +21,17 @@ export default function Header() {
     const [modal, setModal] = useState<boolean>(false);
     const [isLogin, setIsLogin] = useState<boolean>(true);
 
+    useEscapePress(() => setModal(false));
+
     return (
         <>
             <AnimatePresence>
-                {modal && (isLogin ? <LoginForm /> : <RegisterForm />)}
+                {modal &&
+                    (isLogin ? (
+                        <LoginForm closeCallback={() => setModal(false)} />
+                    ) : (
+                        <RegisterForm closeCallback={() => setModal(false)} />
+                    ))}
             </AnimatePresence>
             <AnimatePresence>
                 <motion.header

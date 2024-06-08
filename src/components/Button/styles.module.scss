@@ -1,0 +1,30 @@
+.button {
+    width: 100%;
+    height: 100%;
+
+    background: transparent;
+
+    &--default {
+        border: 1px solid transparent;
+        border-radius: var(--border-radius--small);
+        background: var(--color-surface);
+
+        &:hover {
+            border-color: var(--color-primary);
+        }
+
+        transition: border-color 0.5s var(--cubic-bezier--default);
+    }
+
+    &--transparent {
+        border: 1px solid transparent;
+        border-radius: var(--border-radius--small);
+        background: transparent;
+
+        &:hover {
+            border-color: var(--color-primary);
+        }
+
+        transition: border-color 0.5s var(--cubic-bezier--default);
+    }
+}

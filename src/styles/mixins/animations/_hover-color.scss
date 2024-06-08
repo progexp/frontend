@@ -1,0 +1,8 @@
+@mixin hover-color($color) {
+    cursor: pointer;
+    transition: background 0.5s var(--cubic-bezier--default);
+
+    &:hover {
+        background: $color;
+    }
+}

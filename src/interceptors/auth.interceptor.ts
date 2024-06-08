@@ -16,9 +16,11 @@ const axiosClassic: AxiosInstance = axios.create(options);
 const axiosWithAuth: AxiosInstance = axios.create(options);
 
 axiosWithAuth.interceptors.request.use((config) => {
-    const accessToken: string | null = getAccessToken();
+    const accessToken = getAccessToken();
 
-    if (config?.headers && accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+    if (config?.headers && accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+    }
 
     return config;
 });
@@ -38,9 +40,12 @@ axiosWithAuth.interceptors.response.use(
             originalRequest._isRetry = true;
             try {
                 await authService.getNewTokens();
+
                 return axiosWithAuth.request(originalRequest);
             } catch (error) {
-                if (errorCatch(error) === 'jwt expired') removeFromStorage();
+                if (errorCatch(error) === 'jwt expired') {
+                    removeFromStorage();
+                }
             }
         }
 

@@ -1,6 +1,6 @@
 @mixin default-hover-scale() {
     cursor: pointer;
-    transition: transform 0.25s var(--default-cubic-bezier);
+    transition: transform 0.5s var(--cubic-bezier--default);
 
     &:hover {
         transform: scale(1.05);

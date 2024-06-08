@@ -1,7 +1,7 @@
 @mixin active-transform($axis) {
     will-change: transform;
     cursor: pointer;
-    transition: transform 0.25s var(--default-cubic-bezier);
+    transition: transform 0.5s var(--cubic-bezier--default);
 
     @if $axis == 'x' {
         &:active {

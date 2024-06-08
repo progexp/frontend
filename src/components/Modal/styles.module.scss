@@ -2,14 +2,48 @@
 
 .modal {
     @include center-block();
-    background: var(--color-black-alpha);
+    background: var(--color-black--alpha);
 
     pointer-events: auto;
-    z-index: var(--z-index-modal);
+    z-index: var(--z-index--modal);
 
-    > .modal__inner {
-        background: var(--color-surface);
+    &__inner {
+        position: relative;
+
+        background: var(--color-background--primary);
         padding: 20px;
-        border-radius: var(--border-radius-default);
+        border-radius: var(--border-radius--default);
+    }
+
+    &__close-btn {
+        @include center-block();
+        width: calc(100% + 100px);
+        height: calc(100% + 100px);
+
+        top: 0;
+        left: 0;
+
+        > .close-btn__btn {
+            pointer-events: auto;
+
+            @include default-hover-scale();
+            @include hover-color(var(--color-primary--hover));
+            @include active-color(var(--color-primary--active));
+
+            position: relative;
+            left: 40%;
+            bottom: 55%;
+
+            width: 50px;
+            height: 50px;
+
+            border-radius: var(--border-radius--circle);
+
+            background: var(--color-surface);
+
+            transition:
+                background 0.5s var(--cubic-bezier--default),
+                transform 0.5s var(--cubic-bezier--default);
+        }
     }
 }

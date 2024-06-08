@@ -2,13 +2,13 @@
     --color-white: rgb(255, 255, 255);
     --color-black: rgb(0, 0, 0);
 
-    --color-white-alpha: var(--color-text-primary);
-    --color-black-alpha: rgba(0, 0, 0, 0.5);
+    --color-white--alpha: var(--color-text--primary);
+    --color-black--alpha: rgba(0, 0, 0, 0.5);
 
     --color-surface: rgb(34, 34, 34);
     --color-primary: rgb(225, 136, 225);
     --color-primary--vivid: rgb(255, 26, 255);
-    --color-background-primary: rgb(24, 24, 24);
+    --color-background--primary: rgb(24, 24, 24);
 
     --color-secondary: rgb(18, 18, 18);
 
@@ -17,37 +17,39 @@
 
     --color-secondary--hover: rgb(31, 31, 31);
 
-    --color-border-default: rgba(87, 87, 87, 0.25);
-    --color-border-vivid: rgba(87, 87, 87, 0.5);
+    --color-border--default: rgba(87, 87, 87, 0.25);
+    --color-border--vivid: rgba(87, 87, 87, 0.5);
 
-    --color-text-primary: rgba(255, 255, 255, 80);
-    --color-text-secondary: rgba(0, 0, 0, 80);
+    --color-text--primary: rgba(255, 255, 255, 80);
+    --color-text--secondary: rgba(0, 0, 0, 80);
 
-    --color-text-idle: rgb(136, 136, 136);
-    --color-text-active: var(--color-white);
+    --color-text--idle: rgb(136, 136, 136);
+    --color-text--active: var(--color-white);
 
-    --border-radius-small: 6px;
-    --border-radius-default: 12px;
-    --border-radius-medium: 16px;
+    --border-radius--small: 6px;
+    --border-radius--default: 12px;
+    --border-radius--medium: 16px;
 
-    --default-cubic-bezier: cubic-bezier(0.23, 1, 0.32, 1);
+    --border-radius--circle: 50%;
 
-    --font-size-very-small: 0.7rem;
-    --font-size-small: 0.85rem;
-    --font-size-input: 0.9rem;
-    --font-size-default: 1rem;
+    --cubic-bezier--default: cubic-bezier(0.23, 1, 0.32, 1);
+
+    --font-size--very-small: 0.7rem;
+    --font-size--small: 0.85rem;
+    --font-size--input: 0.9rem;
+    --font-size--default: 1rem;
     --font-size--logotype: 1.2rem;
     --font-size--big-logotype: 1.75rem;
 
-    --font-weight-regular: 400;
-    --font-weight-medium: 500;
-    --font-weight-semi-bold: 600;
-    --font-weight-bold: 700;
-    --font-weight-extra-bold: 800;
-    --font-weight-black: 900;
+    --font-weight--regular: 400;
+    --font-weight--medium: 500;
+    --font-weight--semi-bold: 600;
+    --font-weight--bold: 700;
+    --font-weight--extra-bold: 800;
+    --font-weight--black: 900;
 
-    --z-index-modal: 9999;
-    --z-index-userbar-profile: 100;
+    --z-index--modal: 9999;
+    --z-index--userbar-profile: 100;
 
-    --color-userbar-profile--background: var(--color-secondary--hover);
+    --userbar__profile--color-background: var(--color-secondary--hover);
 }

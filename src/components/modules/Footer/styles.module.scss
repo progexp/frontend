@@ -21,8 +21,8 @@
 
         > .info__copyright {
             > .copyright__text {
-                color: var(--color-text-idle);
-                font-size: var(--font-size-small);
+                color: var(--color-text--idle);
+                font-size: var(--font-size--small);
             }
         }
     }
@@ -33,7 +33,7 @@
 
         > a {
             > .links__link {
-                border-radius: var(--border-radius-default);
+                border-radius: var(--border-radius--default);
             }
         }
     }

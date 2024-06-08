@@ -25,7 +25,7 @@
                     }
 
                     > .logotype__text {
-                        color: var(--color-text-primary);
+                        color: var(--color-text--primary);
                         font-size: var(--font-size--logotype);
                         font-weight: 700;
                         text-transform: uppercase;
@@ -50,14 +50,14 @@
             gap: 20px;
 
             > .registration__text {
-                color: var(--color-text-idle);
-                font-size: var(--font-size-input);
+                color: var(--color-text--idle);
+                font-size: var(--font-size--input);
 
                 cursor: pointer;
 
                 transition:
-                    color 0.25s var(--default-cubic-bezier),
-                    text-shadow 0.25s var(--default-cubic-bezier);
+                    color 0.5s var(--cubic-bezier--default),
+                    text-shadow 0.5s var(--cubic-bezier--default);
 
                 &:hover {
                     color: var(--color-primary);
