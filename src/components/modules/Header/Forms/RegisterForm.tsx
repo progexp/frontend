@@ -3,85 +3,86 @@
 import cn from 'classnames';
 import style from './styles.module.scss';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { Button, Input, Modal, type CloseCallbackProps } from '@/components';
 
 import Image from 'next/image';
 import { InputTypes } from '@/enums';
+
+import { AuthValidationRegExps, NotificationsManager } from '@shared/systems';
+import { AuthMutationKey } from '@/enums';
+
+import { AuthService } from '@/services';
 import { useMutation } from '@tanstack/react-query';
-import { axiosClassic } from '@/interceptors';
-import { useClickOutside } from '@/hooks';
 
-async function tryRegister(
-    login: string,
-    email: string,
-    password: string,
-    passwordConfirm: string
-) {
-    if (login.length > 20) {
-        throw new Error('Логин не может быть больше 20 символов');
-    }
-
-    if (login.length < 3) {
-        throw new Error('Логин не может быть короче 3 символов');
-    }
-
-    if (email.length > 25) {
-        throw new Error('Электронная почта не может быть больше 25 символов');
-    }
-
-    if (email.length < 5) {
-        throw new Error('Электронная почта не может быть короче 5 символов');
-    }
-
-    if (password.length > 40 || passwordConfirm.length > 40) {
-        throw new Error('Пароль не может быть больше 40 символов');
-    }
-
-    if (password.length < 6 || passwordConfirm.length < 6) {
-        throw new Error('Пароль не может быть короче 6 символов');
-    }
-
-    if (password !== passwordConfirm) {
-        throw new Error('Введенные пароли не совпадают');
-    }
-
-    try {
-        const updateResponse = await axiosClassic.put(`auth`, {
-            login: login,
-            email: email,
-            password: password,
-            passwordConfirm: passwordConfirm
-        });
-
-        return updateResponse.data;
-    } catch (error: any) {
-        throw new Error(error);
-    }
-}
-
-export default function Register({ closeCallback }: CloseCallbackProps) {
+export default function RegisterForm({ closeCallback }: CloseCallbackProps) {
     const [login, setLogin] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
-    // const { mutate } = useMutation({
-    //     mutationKey: ['post'],
-    //     mutationFn: async (data: PostDto) => tryRegister(data, editorState),
-    //     onError: (error) => {
-    //         NotificationsManager.sendError(error.message);
-    //     },
-    //     onSuccess: (data: PostDto) => {
-    //         setIsPostEdit(false);
-    //         setPost({
-    //             ...data,
-    //             author: newPost.author
-    //         });
-    //         NotificationsManager.sendSuccess('Вы успешно поменяли пост');
-    //     }
-    // });
+    function submit() {
+        if (
+            login.trim() === '' ||
+            email.trim() === '' ||
+            password.trim() === '' ||
+            passwordConfirm.trim() === ''
+        ) {
+            throw new Error('Все поля обязательны к заполнению');
+        }
+
+        if (!AuthValidationRegExps.loginRegExps.AllowedChars.test(login)) {
+            throw new Error('Логин должен содержать только латинские символы');
+        }
+
+        if (!AuthValidationRegExps.loginRegExps.Length.test(login)) {
+            throw new Error('Логин не может быть меньше 3 или больше 20 символов');
+        }
+
+        if (!AuthValidationRegExps.emailRegExps.AllowedChars.test(email)) {
+            throw new Error(
+                'Электронная почта должна содержать только латинские символы, должна быть по формату: example@mail.ru'
+            );
+        }
+
+        if (!AuthValidationRegExps.emailRegExps.Length.test(email)) {
+            throw new Error('Электронная почта не может быть меньше 5 или больше 25 символов');
+        }
+
+        if (
+            !AuthValidationRegExps.passwordRegExps.AllowedChars.test(password) ||
+            !AuthValidationRegExps.passwordRegExps.AllowedChars.test(passwordConfirm)
+        ) {
+            throw new Error('Пароль должен содержать только латинские символы');
+        }
+
+        if (
+            !AuthValidationRegExps.passwordRegExps.Length.test(password) ||
+            !AuthValidationRegExps.passwordRegExps.Length.test(passwordConfirm)
+        ) {
+            throw new Error('Пароль не может быть меньше 6 и больше 40 символов');
+        }
+
+        if (password !== passwordConfirm) {
+            throw new Error('Введенные пароли отличаются');
+        }
+
+        return AuthService.tryRegister(login, email, password, passwordConfirm);
+    }
+
+    const { mutate } = useMutation({
+        mutationKey: [AuthMutationKey.Register],
+        mutationFn: () => submit(),
+        onError: (error: any) => {
+            NotificationsManager.sendError(
+                error?.response?.data?.message ? error?.response?.data?.message : error.message
+            );
+        },
+        onSuccess: () => {
+            NotificationsManager.sendSuccess('Добро пожаловать в систему ProgExp!');
+        }
+    });
 
     return (
         <Modal closeCallback={closeCallback}>
@@ -117,7 +118,7 @@ export default function Register({ closeCallback }: CloseCallbackProps) {
                         />
                     </div>
                     <div className={cn(style.form__buttons)}>
-                        <Button onClick={null}>Войти</Button>
+                        <Button onClick={mutate}>Войти</Button>
                     </div>
                 </div>
             </div>

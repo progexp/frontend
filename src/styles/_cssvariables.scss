@@ -52,4 +52,7 @@
     --z-index--userbar-profile: 100;
 
     --userbar__profile--color-background: var(--color-secondary--hover);
+
+    --notification--color-background: rgba(31, 31, 31, 0.6);
+    --notification--backdrop-filter: blur(10px);
 }

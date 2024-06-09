@@ -1,10 +1,10 @@
-import axios, { AxiosInstance, type CreateAxiosDefaults } from 'axios';
+import axios from 'axios';
 
 import { errorCatch } from './helper';
-import { getAccessToken, removeFromStorage } from '@/services';
-import { authService } from '@/services/auth.service';
 
-const options: CreateAxiosDefaults = {
+import { AuthService, getAccessToken, removeFromStorage } from '@/services';
+
+const options = {
     baseURL: 'http://localhost:4200/api',
     headers: {
         'Content-Type': 'application/json'
@@ -12,8 +12,8 @@ const options: CreateAxiosDefaults = {
     withCredentials: true
 };
 
-const axiosClassic: AxiosInstance = axios.create(options);
-const axiosWithAuth: AxiosInstance = axios.create(options);
+const axiosClassic = axios.create(options);
+const axiosWithAuth = axios.create(options);
 
 axiosWithAuth.interceptors.request.use((config) => {
     const accessToken = getAccessToken();
@@ -39,7 +39,7 @@ axiosWithAuth.interceptors.response.use(
         ) {
             originalRequest._isRetry = true;
             try {
-                await authService.getNewTokens();
+                await AuthService.getNewTokens();
 
                 return axiosWithAuth.request(originalRequest);
             } catch (error) {

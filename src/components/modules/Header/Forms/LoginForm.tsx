@@ -4,16 +4,17 @@ import cn from 'classnames';
 import style from './styles.module.scss';
 
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 import { Button, Checkbox, Input, Modal, type CloseCallbackProps } from '@/components';
 
 import Image from 'next/image';
 import { InputTypes } from '@/enums';
 
-import { AuthValidationRegExps } from '@shared/systems';
-import { useMutation } from '@tanstack/react-query';
+import { AuthValidationRegExps, NotificationsManager } from '@shared/systems';
+import { AuthMutationKey } from '@/enums';
 
-function tryLogin(login: string, password: string, isRemember: boolean) {}
+import { AuthService } from '@/services';
 
 export default function LoginForm({ closeCallback }: CloseCallbackProps) {
     const [login, setLogin] = useState<string>('');
@@ -21,30 +22,41 @@ export default function LoginForm({ closeCallback }: CloseCallbackProps) {
     const [isRememberMe, setIsRememberMe] = useState<boolean>(true);
 
     function submit() {
-        if (!login || !AuthValidationRegExps.loginRegExps.AllowedChars.test(login)) {
-            return new Error();
+        if (login.trim() === '' || password.trim() === '') {
+            throw new Error('Все поля обязательны к заполнению');
         }
 
-        if (!login || !AuthValidationRegExps.loginRegExps.Length.test(login)) {
-            return new Error();
+        if (!AuthValidationRegExps.loginRegExps.AllowedChars.test(login)) {
+            throw new Error('Логин должен содержать только латинские символы');
         }
+
+        if (!AuthValidationRegExps.loginRegExps.Length.test(login)) {
+            throw new Error('Логин не может быть меньше 3 или больше 20 символов');
+        }
+
+        if (!AuthValidationRegExps.passwordRegExps.AllowedChars.test(password)) {
+            throw new Error('Пароль должен содержать только латинские символы');
+        }
+
+        if (!AuthValidationRegExps.passwordRegExps.Length.test(password)) {
+            throw new Error('Пароль не может быть меньше 6 и больше 40 символов');
+        }
+
+        return AuthService.tryLogin(login, password, isRememberMe);
     }
 
-    // const { mutate } = useMutation({
-    //     mutationKey: ['post'],
-    //     mutationFn: async (data) => tryRegister(data),
-    //     onError: (error) => {
-    //         NotificationsManager.sendError(error.message);
-    //     },
-    //     onSuccess: (data: PostDto) => {
-    //         setIsPostEdit(false);
-    //         setPost({
-    //             ...data,
-    //             author: newPost.author
-    //         });
-    //         NotificationsManager.sendSuccess('Вы успешно поменяли пост');
-    //     }
-    // });
+    const { mutate } = useMutation({
+        mutationKey: [AuthMutationKey.Login],
+        mutationFn: () => submit(),
+        onError: (error: any) => {
+            NotificationsManager.sendError(
+                error?.response?.data?.message ? error?.response?.data?.message : error.message
+            );
+        },
+        onSuccess: () => {
+            NotificationsManager.sendSuccess('Добро пожаловать в систему ProgExp!');
+        }
+    });
 
     return (
         <Modal closeCallback={closeCallback}>
@@ -74,7 +86,7 @@ export default function LoginForm({ closeCallback }: CloseCallbackProps) {
                         </Checkbox>
                     </div>
                     <div className={cn(style.form__buttons)}>
-                        <Button onClick={null}>Войти</Button>
+                        <Button onClick={mutate}>Войти</Button>
                     </div>
                 </div>
             </div>

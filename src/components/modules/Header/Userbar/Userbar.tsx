@@ -16,7 +16,9 @@ import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CUBIC_EASE, TIME, USERBAR } from '@/constants';
 
-import { authService } from '@/services';
+import { AuthMutationKey } from '@/enums';
+
+import { AuthService } from '@/services';
 
 export default function Userbar() {
     const router = useRouter();
@@ -32,8 +34,8 @@ export default function Userbar() {
     useMouseMoveOutside(profileRef, closeProfile, 400);
 
     const { mutate } = useMutation({
-        mutationKey: ['logout'],
-        mutationFn: () => authService.logout(),
+        mutationKey: [AuthMutationKey.Logout],
+        mutationFn: () => AuthService.logout(),
         onSuccess: () => router.push('/auth/login')
     });
 
