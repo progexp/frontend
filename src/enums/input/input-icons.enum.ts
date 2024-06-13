@@ -1,3 +1,3 @@
 export enum InputIcons {
-    Search = 'input/search.svg'
+    Search = '/input/search.svg'
 }

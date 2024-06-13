@@ -75,7 +75,7 @@ export default function Input({
                     >
                         <div className={cn(style.eye__icon, value && style['eye__icon--cancel'])}>
                             <Image
-                                src={`eye/eye-${isShowPassword ? 'show' : 'hide'}.svg`}
+                                src={`/eye/eye-${isShowPassword ? 'show' : 'hide'}.svg`}
                                 alt=""
                                 width={20}
                                 height={20}
@@ -104,7 +104,7 @@ export default function Input({
                             }}
                             transition={{ duration: TIME, ease: CUBIC_EASE }}
                         >
-                            <Image src="input/cancel.svg" alt="" width={20} height={20} />
+                            <Image src="/input/cancel.svg" alt="" width={20} height={20} />
                         </motion.div>
                     </div>
                 )}

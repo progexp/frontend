@@ -1,0 +1,21 @@
+@import '@/styles/mixins';
+
+.commentaries {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+    border-top: 1px solid var(--color-border-vivid);
+
+    > .commentaries__description {
+        color: var(--color-text-primary);
+        padding: 25px;
+    }
+
+    > .commentaries__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        pointer-events: auto;
+        width: 1000px;
+    }
+}

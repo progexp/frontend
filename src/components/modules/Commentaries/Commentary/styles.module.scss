@@ -1,0 +1,55 @@
+.commentary {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid var(--color-border-default);
+    width: 1000px;
+    cursor: pointer;
+
+    > .commentary__info {
+        display: flex;
+        justify-content: space-between;
+
+        > .info__author {
+            color: var(--color-text-primary);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        > .info__createdAt {
+            color: var(--color-text-idle);
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+    }
+
+    > .commentary__content {
+        > .content__text {
+            color: var(--color-text-primary);
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+    }
+
+    > .commentary__options-info {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+
+        > .options-info__likes {
+            color: var(--color-text-primary);
+            font-weight: 500;
+            font-size: 0.85rem;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            &:active {
+                opacity: 0.75;
+            }
+        }
+    }
+}

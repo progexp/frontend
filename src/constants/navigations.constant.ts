@@ -10,8 +10,8 @@ export const NAVIGATIONS: Navigations[] = [
         path: '/theory'
     },
     {
-        name: 'Форум',
-        path: '/forum'
+        name: 'Создать пост',
+        path: '/create-post'
     },
     {
         name: 'Сообщения',

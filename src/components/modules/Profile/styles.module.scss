@@ -1,0 +1,17 @@
+@import '@/styles/mixins';
+
+.profile {
+    width: 100vw;
+    height: 100vh;
+
+    @include flex-col-start-center();
+
+    &__inner {
+        width: 900px;
+        height: 100%;
+
+        @include flex-col-start-center();
+
+        gap: 10px;
+    }
+}

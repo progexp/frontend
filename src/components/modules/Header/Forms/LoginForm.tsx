@@ -3,7 +3,7 @@
 import cn from 'classnames';
 import style from './styles.module.scss';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { Button, Checkbox, Input, Modal, type CloseCallbackProps } from '@/components';
@@ -15,8 +15,11 @@ import { AuthValidationRegExps, NotificationsManager } from '@shared/systems';
 import { AuthMutationKey } from '@/enums';
 
 import { AuthService } from '@/services';
+import { RootContext } from '@/components/layouts/RootProvider';
 
 export default function LoginForm({ closeCallback }: CloseCallbackProps) {
+    const { setProfile } = useContext(RootContext);
+
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [isRememberMe, setIsRememberMe] = useState<boolean>(true);
@@ -55,6 +58,7 @@ export default function LoginForm({ closeCallback }: CloseCallbackProps) {
         },
         onSuccess: () => {
             NotificationsManager.sendSuccess('Добро пожаловать в систему ProgExp!');
+            window.location.reload();
         }
     });
 
@@ -63,7 +67,7 @@ export default function LoginForm({ closeCallback }: CloseCallbackProps) {
             <div className={cn(style.modal__form)}>
                 <div className={cn(style.form__logotype)}>
                     <div className={cn(style.logotype__img)}>
-                        <Image src="logotype.svg" alt="ProgExp" width={120} height={120} />
+                        <Image src="/logotype.svg" alt="ProgExp" width={120} height={120} />
                     </div>
                     <p className={cn(style.logotype__text)}>ProgExp</p>
                 </div>

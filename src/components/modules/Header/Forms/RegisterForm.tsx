@@ -89,7 +89,7 @@ export default function RegisterForm({ closeCallback }: CloseCallbackProps) {
             <div className={cn(style.modal__form)}>
                 <div className={cn(style.form__logotype)}>
                     <div className={cn(style.logotype__img)}>
-                        <Image src="logotype.svg" alt="ProgExp" width={120} height={120} />
+                        <Image src="/logotype.svg" alt="ProgExp" width={120} height={120} />
                     </div>
                     <p className={cn(style.logotype__text)}>ProgExp</p>
                 </div>

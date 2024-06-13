@@ -3,11 +3,11 @@ import type { NextRequest } from 'next/server';
 import { TOKENS } from '@/constants';
 
 export function middleware(request: NextRequest) {
-    const { url, cookies } = request;
+    // const { url, cookies } = request;
+    //
+    // const refreshToken = cookies.get(TOKENS.ACCESS_TOKEN)?.value;
 
-    const refreshToken = cookies.get(TOKENS.ACCESS_TOKEN)?.value;
-
-    const isAuthPage = url.includes('/auth/login');
+    // const isAuthPage = url.includes('/auth/login');
 
     // if (
     //     !refreshToken

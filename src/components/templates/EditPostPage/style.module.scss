@@ -1,0 +1,85 @@
+@import '@/styles/mixins';
+
+.post-edit-page {
+    @include center-block();
+    flex-wrap: wrap;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: auto;
+    background: var(--color-black--alpha);
+
+    > .post-edit-page__inner {
+        pointer-events: auto;
+        background: var(--color-secondary);
+        border-radius: var(--border-radius--medium);
+        padding: 30px;
+        border: 1px solid var(--color-border--default);
+        width: 1250px;
+        @include flex-col-center-center();
+        justify-content: flex-start;
+        gap: 20px;
+
+        > .inner__header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            > .header__description {
+                color: var(--color-text--primary);
+                font-size: 2rem;
+                font-weight: 600;
+            }
+
+            > .header__close-icon {
+                @include default-hover-scale();
+            }
+        }
+
+        > .inner__editor-description {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            //height: 500px;
+            color: var(--color-text--primary);
+            background: var(--color-surface);
+            border-radius: var(--border-radius--default);
+            padding: 30px;
+            gap: 20px;
+
+            > .inner__editor-editor {
+                background: var(--color-background--primary);
+                height: 100%;
+                padding: 20px;
+                border-radius: var(--border-radius--default);
+            }
+        }
+
+        > .inner__images {
+            width: 100%;
+            max-height: 300px;
+            @include flex-row-center-center();
+            gap: 20px;
+
+            > .images__image {
+                object-fit: cover;
+                align-self: center;
+                height: 100%;
+                border-radius: var(--border-radius--default);
+            }
+        }
+
+        > .inner__image-upload {
+            width: 100%;
+            height: 80px;
+        }
+
+        > .inner__buttons {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            height: 50px;
+        }
+    }
+}

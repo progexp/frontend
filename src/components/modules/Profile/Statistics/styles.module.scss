@@ -1,0 +1,46 @@
+@import '@/styles/mixins';
+
+.statistics {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid var(--color-border--vivid);
+    border-radius: var(--border-radius--default);
+
+    background: var(--profile-background);
+
+    > .statistics__items {
+        @include flex-row-space-center();
+
+        gap: 20px;
+
+        list-style: none;
+
+        > .statistics__item {
+            @include flex-row-center-center();
+
+            gap: 5px;
+
+            flex: 1;
+
+            border-radius: var(--border-radius--default);
+
+            font-size: var(--font-size--default);
+            font-weight: var(--font-weight--medium);
+
+            text-align: center;
+
+            color: var(--color-text--idle);
+
+            &--active {
+                color: var(--color-text--primary);
+                background: red;
+            }
+
+            > * {
+                padding: 15px 10px;
+            }
+        }
+    }
+}

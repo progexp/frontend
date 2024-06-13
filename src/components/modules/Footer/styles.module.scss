@@ -1,11 +1,15 @@
 @import '@/styles/mixins';
 
 .footer {
+    position: absolute;
+
     @include flex-row-space-center();
     justify-content: space-evenly;
 
     width: 100%;
     background: var(--color-secondary);
+
+    bottom: 0;
 
     overflow: hidden;
 

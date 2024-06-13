@@ -1,11 +1,12 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import cn from 'classnames';
 import style from './styles.module.scss';
 
 import { useRouter } from 'next/navigation';
+
 import { useMutation } from '@tanstack/react-query';
 
 import { useClickOutside, useEscapePress, useMouseMoveOutside } from '@/hooks';
@@ -19,10 +20,14 @@ import { CUBIC_EASE, TIME, USERBAR } from '@/constants';
 import { AuthMutationKey } from '@/enums';
 
 import { AuthService } from '@/services';
+import type { Profile } from '@shared/types';
+import { NotificationsManager } from '@shared/systems';
 
-export default function Userbar() {
-    const router = useRouter();
+type UserbarProps = {
+    profile: Profile;
+};
 
+export default function Userbar({ profile }: UserbarProps) {
     const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
     const profileRef = useRef<HTMLDivElement>(null);
 
@@ -33,11 +38,24 @@ export default function Userbar() {
     useEscapePress(closeProfile);
     useMouseMoveOutside(profileRef, closeProfile, 400);
 
-    const { mutate } = useMutation({
+    const { mutate: mutateLogout } = useMutation({
         mutationKey: [AuthMutationKey.Logout],
         mutationFn: () => AuthService.logout(),
-        onSuccess: () => router.push('/auth/login')
+        onError: (error: any) => {
+            NotificationsManager.sendError(`Произошла ошибка. Подробнее: ${error.message}`);
+        },
+        onSuccess: () => {
+            window.location.reload();
+        }
     });
+
+    function handleClickToMenu(index: number) {
+        switch (index) {
+            case 4: {
+                mutateLogout();
+            }
+        }
+    }
 
     return (
         <div
@@ -47,13 +65,13 @@ export default function Userbar() {
             <div className={cn(style.userbar)} onClick={toggleProfile}>
                 <span className={cn(style.userbar__inner)}>
                     <Image
-                        src="http://localhost:4200/static/avatars/mortyhwk.jpg"
+                        src={profile?.avatar || 'http://localhost:4200/static/avatars/default.jpg'}
                         className={cn(style.userbar__avatar)}
                         alt="Аватар"
                         width={28}
                         height={28}
                     />
-                    <div className={cn(style.userbar__username)}>MortyHwk</div>
+                    <div className={cn(style.userbar__username)}>{profile.login}</div>
                     <Image
                         src="/arrows/arrow-bottom.svg"
                         alt="Открыть юзербар"
@@ -72,24 +90,29 @@ export default function Userbar() {
                         transition={{ duration: TIME, ease: CUBIC_EASE }}
                     >
                         <div className={cn(style.menu__inner)}>
-                            <Link href="">
+                            <Link href={`/profile/${profile?.id}`}>
                                 <div className={cn(style.menu__user)}>
                                     <Image
-                                        src="http://localhost:4200/static/avatars/mortyhwk.jpg"
+                                        src={
+                                            profile?.avatar ||
+                                            'http://localhost:4200/static/avatars/default.jpg'
+                                        }
                                         className={cn(style.user__avatar)}
                                         alt="Аватар"
                                         width={50}
                                         height={50}
                                     />
-                                    <div className={cn(style.user__username)}>MortyHwk</div>
-                                    <div className={cn(style.user__email)}>
-                                        projectx.flex@gmail.com
-                                    </div>
+                                    <div className={cn(style.user__username)}>{profile.login}</div>
+                                    <div className={cn(style.user__email)}>{profile.email}</div>
                                 </div>
                             </Link>
                             <ul className={cn(style.menu__list)}>
                                 {USERBAR.map((item, index) => (
-                                    <li key={index} className={cn(style.list__item)}>
+                                    <li
+                                        key={index}
+                                        className={cn(style.list__item)}
+                                        onClick={() => handleClickToMenu(index)}
+                                    >
                                         <span className={cn(style.item__inner)}>
                                             <Image
                                                 src={item.icon}

@@ -1,0 +1,54 @@
+@import '@/styles/mixins';
+
+.theory {
+    @include flex-col-center-center();
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    gap: 20px;
+}
+
+.theories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.title {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.bold {
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: all 0.25s var(--cubic-bezier--default);
+
+    &:hover {
+        color: var(--color-primary);
+    }
+}
+
+.list {
+}
+
+.elem {
+    color: white;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: all 0.25s var(--cubic-bezier--default);
+
+    &:hover {
+        color: var(--color-primary);
+    }
+}

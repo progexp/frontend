@@ -49,10 +49,15 @@
         right: 0;
         width: 200px;
         padding: 5px;
+
         background: var(--userbar__profile--color-background);
+
         border: 1px solid var(--color-border--default);
         border-radius: var(--border-radius--default);
+
         z-index: var(--z-index--userbar-profile);
+
+        overflow: hidden;
 
         > .menu__inner {
             display: flex;
@@ -68,8 +73,6 @@
 
                     border: 1px solid transparent;
                     border-radius: var(--border-radius--default);
-
-                    overflow: hidden;
 
                     transition:
                         background 0.5s var(--cubic-bezier--default),
@@ -118,6 +121,7 @@
                     border: 1px solid transparent;
                     border-radius: var(--border-radius--default);
                     cursor: pointer;
+                    overflow: hidden;
 
                     transition:
                         background 0.5s var(--cubic-bezier--default),

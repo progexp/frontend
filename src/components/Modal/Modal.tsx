@@ -52,7 +52,7 @@ export default function Modal({ closeCallback, children }: ModalProps) {
             >
                 <div className={cn(style['modal__close-btn'])}>
                     <div className={cn(style['close-btn__btn'])} onClick={closeCallback}>
-                        <Image src="input/cancel.svg" alt="" width={50} height={50} />
+                        <Image src="/input/cancel.svg" alt="" width={50} height={50} />
                     </div>
                 </div>
                 {children}

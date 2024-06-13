@@ -3,7 +3,7 @@
 import cn from 'classnames';
 import style from './styles.module.scss';
 
-import { useState } from 'react';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { Input, LoginForm, RegisterForm, Userbar } from '@/components';
 
 import Link from 'next/link';
@@ -12,16 +12,32 @@ import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CUBIC_EASE, TIME } from '@/constants';
 
-import { InputIcons } from '@/enums';
+import { AuthMutationKey, InputIcons } from '@/enums';
 import { useEscapePress } from '@/hooks';
+import { useQuery } from '@tanstack/react-query';
+import { AuthService } from '@/services';
+import { RootContext } from '@/components/layouts/RootProvider';
 
 export default function Header() {
+    const { profile, setProfile } = useContext(RootContext);
+
     const [search, setSearch] = useState<string>('');
 
     const [modal, setModal] = useState<boolean>(false);
     const [isLogin, setIsLogin] = useState<boolean>(true);
 
     useEscapePress(() => setModal(false));
+
+    const { data } = useQuery({
+        queryKey: [AuthMutationKey.GetProfile],
+        queryFn: () => AuthService.getMyProfile()
+    });
+
+    useLayoutEffect(() => {
+        if (data) {
+            setProfile(data);
+        }
+    }, [data, setProfile]);
 
     return (
         <>
@@ -42,7 +58,7 @@ export default function Header() {
                     }}
                     animate={{
                         opacity: 1,
-                        height: 'auto'
+                        height: '60px'
                     }}
                     exit={{
                         opacity: 0,
@@ -95,27 +111,30 @@ export default function Header() {
                                 icon={InputIcons.Search}
                             />
                         </div>
-                        {/*<Userbar />*/}
-                        <div className={cn(style.header__registration)}>
-                            <p
-                                className={cn(style.registration__text)}
-                                onClick={() => {
-                                    setModal(true);
-                                    setIsLogin(false);
-                                }}
-                            >
-                                Создать аккаунт
-                            </p>
-                            <p
-                                className={cn(style.registration__text)}
-                                onClick={() => {
-                                    setModal(true);
-                                    setIsLogin(true);
-                                }}
-                            >
-                                Войти
-                            </p>
-                        </div>
+                        {profile?.login ? (
+                            <Userbar profile={profile} />
+                        ) : (
+                            <div className={cn(style.header__registration)}>
+                                <p
+                                    className={cn(style.registration__text)}
+                                    onClick={() => {
+                                        setModal(true);
+                                        setIsLogin(false);
+                                    }}
+                                >
+                                    Создать аккаунт
+                                </p>
+                                <p
+                                    className={cn(style.registration__text)}
+                                    onClick={() => {
+                                        setModal(true);
+                                        setIsLogin(true);
+                                    }}
+                                >
+                                    Войти
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </motion.header>
             </AnimatePresence>

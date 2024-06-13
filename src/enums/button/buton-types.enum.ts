@@ -1,4 +1,5 @@
 export enum ButtonTypes {
     Default,
-    Transparent
+    Transparent,
+    Dark
 }

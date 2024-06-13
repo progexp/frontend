@@ -1,5 +1,8 @@
 import { removeFromStorage, saveTokenStorage } from './auth-token.service';
+
 import { axiosClassic } from '@/interceptors';
+
+import type { Profile } from '@shared/types';
 
 export class AuthService {
     static async tryLogin(login: string, password: string, isRemember: boolean) {
@@ -34,6 +37,16 @@ export class AuthService {
         }
 
         return response;
+    }
+
+    static async getMyProfile() {
+        const response = await axiosClassic.get('/accounts/profile');
+
+        if (response.data.accessToken) {
+            saveTokenStorage(response.data.accessToken);
+        }
+
+        return response.data as Profile;
     }
 
     static async getNewTokens() {
