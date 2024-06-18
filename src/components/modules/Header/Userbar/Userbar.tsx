@@ -65,7 +65,7 @@ export default function Userbar({ profile }: UserbarProps) {
             <div className={cn(style.userbar)} onClick={toggleProfile}>
                 <span className={cn(style.userbar__inner)}>
                     <Image
-                        src={profile?.avatar || 'http://localhost:4200/static/avatars/default.jpg'}
+                        src={profile?.avatar || 'http://31.128.40.46:4200/static/avatars/default.jpg'}
                         className={cn(style.userbar__avatar)}
                         alt="Аватар"
                         width={28}
@@ -95,7 +95,7 @@ export default function Userbar({ profile }: UserbarProps) {
                                     <Image
                                         src={
                                             profile?.avatar ||
-                                            'http://localhost:4200/static/avatars/default.jpg'
+                                            'http://31.128.40.46:4200/static/avatars/default.jpg'
                                         }
                                         className={cn(style.user__avatar)}
                                         alt="Аватар"

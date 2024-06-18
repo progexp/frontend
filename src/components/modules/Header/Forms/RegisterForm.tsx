@@ -81,6 +81,7 @@ export default function RegisterForm({ closeCallback }: CloseCallbackProps) {
         },
         onSuccess: () => {
             NotificationsManager.sendSuccess('Добро пожаловать в систему ProgExp!');
+            window.location.reload();
         }
     });
 

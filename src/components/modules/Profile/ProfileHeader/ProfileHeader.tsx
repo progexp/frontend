@@ -18,14 +18,14 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
         <div className={cn(style.profile__header)}>
             <div className={cn(style.header__user)}>
                 <Image
-                    src={'http://localhost:4200/static/headers/mortyhwk.jpeg'}
+                    src={'http://31.128.40.46:4200/static/headers/mortyhwk.jpeg'}
                     className={cn(style.user__header)}
                     alt="Шапка"
                     width={1000}
                     height={262}
                 />
                 <Image
-                    src={profile?.avatar || 'http://localhost:4200/static/avatars/default.jpg'}
+                    src={profile?.avatar || 'http://31.128.40.46:4200/static/avatars/default.jpg'}
                     className={cn(style.user__avatar)}
                     alt="Аватар"
                     width={180}
@@ -33,7 +33,7 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
                 />
                 <div className={cn(style.user__info)}>
                     <div className={cn(style.user__username)}>{profile.login}</div>
-                    <div className={cn(style.user__status)}>Ауф!</div>
+                    <div className={cn(style.user__status)}>Пока не заполнен</div>
                 </div>
             </div>
             <div className={cn(style.header__edit)}>

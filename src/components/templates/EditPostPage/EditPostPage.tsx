@@ -60,7 +60,7 @@ export default function EditPostPage(): JSX.Element {
             });
 
             const correctedPath = uploadResponse.data.replace(/\\/g, '/').replace('public/', '');
-            const path = `http://localhost:4200/static/${correctedPath}`;
+            const path = `http://31.128.40.46:4200/static/${correctedPath}`;
 
             setUploads((prev) => [
                 ...prev,

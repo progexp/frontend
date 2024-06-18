@@ -47,7 +47,7 @@ export default function Footer() {
                 <div className={cn(style.footer_links)}>
                     <Link href="https://vk.com/mortylolik">
                         <Image
-                            src="http://localhost:4200/static/contacts/mortyhwk.jpg"
+                            src="http://31.128.40.46:4200/static/contacts/mortyhwk.jpg"
                             alt="mortyhwk"
                             width={35}
                             height={35}
@@ -57,7 +57,7 @@ export default function Footer() {
                     </Link>
                     <Link href="https://vk.com/kazax_bita">
                         <Image
-                            src="http://localhost:4200/static/contacts/shpekel.jpg"
+                            src="http://31.128.40.46:4200/static/contacts/shpekel.jpg"
                             alt="mortyhwk"
                             width={35}
                             height={35}

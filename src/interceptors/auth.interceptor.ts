@@ -5,7 +5,7 @@ import { errorCatch } from './helper';
 import { AuthService, getAccessToken, removeFromStorage } from '@/services';
 
 const options = {
-    baseURL: 'http://localhost:4200/api',
+    baseURL: 'http://31.128.40.46:4200/api',
     headers: {
         'Content-Type': 'application/json'
     },

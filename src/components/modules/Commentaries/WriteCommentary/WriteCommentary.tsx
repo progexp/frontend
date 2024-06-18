@@ -46,7 +46,7 @@ export default function WriteCommentary() {
     return (
         <div className={cn(style['write-commentary'])}>
             <Image
-                src="http://localhost:4200/static/avatars/mortyhwk.jpg"
+                src="http://31.128.40.46:4200/static/avatars/mortyhwk.jpg"
                 className={cn(style['write-commentary__avatar'])}
                 alt="Аватар"
                 width={35}

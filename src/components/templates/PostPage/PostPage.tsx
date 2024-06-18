@@ -140,8 +140,8 @@ export default function PostPage({ id }: PostPageProps) {
                                 <Image
                                     src={
                                         post?.imageUrl !== 'fds'
-                                            ? `http://localhost:4200/static/${post.imageUrl}`
-                                            : 'http://localhost:4200/static/headers/mortyhwk.jpeg'
+                                            ? `http://31.128.40.46:4200/static/${post.imageUrl}`
+                                            : 'http://31.128.40.46:4200/static/headers/mortyhwk.jpeg'
                                     }
                                     alt="Картинка"
                                     width={300}
